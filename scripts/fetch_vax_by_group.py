@@ -1,5 +1,7 @@
 import time
+from datetime import datetime
 import pandas as pd
+import csv
 import re
 from selenium import webdriver
 from selenium.webdriver.edge.options import Options
@@ -13,18 +15,22 @@ class CountyNotFound(Exception):
     pass
 
 def parse_results(results):
-    categories=[]
-    figures=[]
+    parsed_result={}
     for i in results.split('\n'):
         if '%' in i:
             if re.search('[0-9]',i):
-                figures.append(i)
+                figure=i
         else:
-            categories.append(i)
-    # Check that num categories equals num figures
-    if len(categories)!=len(figures):
-        raise ValueError('Length mismatch: Categories list has '+str(len(categories))+' elements, Figures list has '+str(len(figures))+' elements')
-    return [categories,figures]
+            category=i
+            parsed_result[category]=figure
+    return parsed_result
+
+def process_date(date_str):
+    updated_date = date_str.split('Updated')[1].split('with')[0].strip()
+    data_date = date_str.split('from')[1].strip()
+    updated_date_formatted=datetime.strptime(updated_date, '%B %d, %Y').strftime('%Y-%m-%d')
+    data_date_formatted=datetime.strptime(data_date, '%B %d, %Y').strftime('%Y-%m-%d')
+    return updated_date_formatted,data_date_formatted
 
 def fetch_county_vax(county):
     edge_options=Options()
@@ -55,7 +61,6 @@ def fetch_county_vax(county):
             # Select data type
             data_type=button.get_attribute('innerHTML')
             driver.execute_script('arguments[0].click();',button)
-            #button.click()
             # Find chart
             chart=driver.find_element('xpath', '//*[starts-with(name(),"cagov-chart-vaccination-groups")][@class="chart"]')
             holder=chart.find_element('xpath','.//*/div[@class="svg-holder"]')
@@ -64,11 +69,14 @@ def fetch_county_vax(county):
             # Get when data was updated
             updated_elem = chart.find_elements('xpath', './/*/div[@class="row"]')[-1]
             updated_text=updated_elem.text.split('.')[0]
-            # Parse and store results
-            data[data_type] = [parse_results(results),updated_text]
+            # Parse and store results/date
+            formatted_result=parse_results(results)
+            updated_date,data_date=process_date(updated_text)
+            formatted_result['Updated Date']=updated_date
+            formatted_result['Data Date'] = data_date
+            data[data_type]=formatted_result
         driver.close()
         return data
     else:
         driver.close()
         raise CountyNotFound('Incorrect county found')
-
