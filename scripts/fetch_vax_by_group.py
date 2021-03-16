@@ -73,9 +73,9 @@ def fetch_county_vax(county):
             formatted_result=parse_results(results)
             formatted_result['County']=county
             updated_date,data_date=process_date(updated_text)
-            formatted_result['Updated Date']=updated_date
-            formatted_result['Data Date'] = data_date
-            formatted_result['Scraped Date']=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            formatted_result['Date Updated']=updated_date
+            formatted_result['Date Data'] = data_date
+            formatted_result['Date Scraped']=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             data[data_type]=formatted_result
         driver.close()
         return data
