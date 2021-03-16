@@ -71,6 +71,7 @@ def fetch_county_vax(county):
             updated_text=updated_elem.text.split('.')[0]
             # Parse and store results/date
             formatted_result=parse_results(results)
+            formatted_result['County']=county
             updated_date,data_date=process_date(updated_text)
             formatted_result['Updated Date']=updated_date
             formatted_result['Data Date'] = data_date
@@ -80,3 +81,22 @@ def fetch_county_vax(county):
     else:
         driver.close()
         raise CountyNotFound('Incorrect county found')
+
+def fetch_vax_by_group():
+    # Get list of all counties in CA
+    counties=pd.read_html('https://en.wikipedia.org/wiki/List_of_counties_in_California')[1]['County'].str.replace('County','').str.strip().values
+    with open('datasets/race_ethnicity_by_county.csv','w') as race_csv, open('datasets/age_by_county.csv','w') as age_csv, open('datasets/gender_by_county.csv','w') as gender_csv:
+        # Create dict with writer objects
+        writers={'Race and ethnicity':race_csv,'Age':age_csv,'Gender':gender_csv}
+        header_flag=False
+        for county in counties[0:2]:
+            # Fetch county data
+            county_data=fetch_county_vax(county)
+            for key in county_data.keys():
+                writer=csv.DictWriter(writers[key],fieldnames=county_data[key].keys())
+                # Write columns only once per CSV
+                if not header_flag:
+                    writer.writeheader()
+                    header_flag=True
+                writer.writerow(county_data[key])
+            header_flag=True
