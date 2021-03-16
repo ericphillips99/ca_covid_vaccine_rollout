@@ -89,7 +89,7 @@ def fetch_vax_by_group():
         # Create dict with writer objects
         writers={'Race and ethnicity':race_csv,'Age':age_csv,'Gender':gender_csv}
         header_flag=False
-        for county in counties[0:2]:
+        for county in counties:
             # Fetch county data
             county_data=fetch_county_vax(county)
             for key in county_data.keys():
