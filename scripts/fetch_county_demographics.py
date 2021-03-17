@@ -15,6 +15,6 @@ for i in range(len(counties)):
     county_filename = county_filenames[i]
     # Download data
     base_url = 'https://www.census.gov/quickfacts/fact/csv/'
-    urllib.request.urlretrieve(base_url + county_url, 'datasets/county_demographics/' + county_filename + '.csv')
+    urllib.request.urlretrieve(base_url + county_url, 'data/raw/county_demographics/' + county_filename + '.csv')
     print('Fetched ' + str(i + 1) + ' of ' + str(len(counties)) + ' counties!')
     time.sleep(0.5)

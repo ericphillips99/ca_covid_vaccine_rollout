@@ -95,9 +95,9 @@ def fetch_vax_by_group():
     counties = pd.read_html('https://en.wikipedia.org/wiki/List_of_counties_in_California')[1]['County'].str.replace(
         'County', '').str.strip().values
     current_time = datetime.now().strftime('%Y-%m-%d_%H.%M.%S')
-    with open('datasets/race_ethnicity_by_county_' + current_time + '.csv', 'w') as race_csv, open(
-            'datasets/age_by_county_' + current_time + '.csv', 'w') as age_csv, open(
-            'datasets/gender_by_county_' + current_time + '.csv', 'w') as gender_csv:
+    with open('data/raw/county_vaccine_data/race_ethnicity_by_county_' + current_time + '.csv', 'w') as race_csv, open(
+            'data/raw/county_vaccine_data/age_by_county_' + current_time + '.csv', 'w') as age_csv, open(
+            'data/raw/county_vaccine_data/gender_by_county_' + current_time + '.csv', 'w') as gender_csv:
         # Create dict with writer objects
         writers = {'Race and ethnicity': race_csv, 'Age': age_csv, 'Gender': gender_csv}
         header_flag = False
