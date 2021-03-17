@@ -3,7 +3,9 @@ import urllib
 import time
 
 # Get list of all counties in CA
-counties = pd.read_html('https://en.wikipedia.org/wiki/List_of_counties_in_California')[1]['County']
+counties = pd.read_html('https://en.wikipedia.org/wiki/List_of_counties_in_California')[1]['County'].str.replace(
+    'County', '').str.strip() + ' County'
+
 # Format county names
 county_urls = (counties.str.replace(' ', '').str.strip().str.lower() + 'california').values
 county_filenames = (counties.str.replace(' ', '_').str.strip().str.lower()).values
