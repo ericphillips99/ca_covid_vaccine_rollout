@@ -1,5 +1,6 @@
 import pandas as pd
 import urllib
+import time
 
 # Get list of all counties in CA
 counties = pd.read_html('https://en.wikipedia.org/wiki/List_of_counties_in_California')[1]['County']
@@ -12,5 +13,6 @@ for i in range(len(counties)):
     county_filename = county_filenames[i]
     # Download data
     base_url = 'https://www.census.gov/quickfacts/fact/csv/'
-    urllib.request.urlretrieve(base_url + county_url, 'county_demographics/' + county_filename)
-    print('Fetched ' + str(counter + 1) + ' of ' + len(counties) + 'counties!')
+    urllib.request.urlretrieve(base_url + county_url, 'datasets/county_demographics/' + county_filename + '.csv')
+    print('Fetched ' + str(i + 1) + ' of ' + str(len(counties)) + ' counties!')
+    time.sleep(0.5)
