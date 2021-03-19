@@ -42,7 +42,7 @@ jobs:
               sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
       - name: Run fetch_vax_by_group
         run: |
-          python src/fetch_vax_by_group.py
+          python scripts/fetch_vax_by_group.py
       - name: Commit data to repo
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
