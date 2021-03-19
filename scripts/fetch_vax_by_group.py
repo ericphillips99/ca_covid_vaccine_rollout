@@ -12,7 +12,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoSuchElementException
 
-driver_path='/opt/homebrew/Caskroom/chromedriver/89.0.4389.23/chromedriver'
+# Uncomment to run local
+#driver_path='/opt/homebrew/Caskroom/chromedriver/89.0.4389.23/chromedriver'
 #driver_path = '/users/ericphillips/personal_ds_projects/msedgedriver'
 
 
@@ -48,7 +49,9 @@ def fetch_county_vax(county):
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--no-sandbox')
-    driver=webdriver.Chrome(driver_path,options=chrome_options)
+    driver = webdriver.Chrome(options=chrome_options)
+    # Uncomment to run local
+    #driver=webdriver.Chrome(driver_path,options=chrome_options)
     # Go to webpage
     driver.get('https://covid19.ca.gov/vaccines/')
     # Wait for search bar to load
