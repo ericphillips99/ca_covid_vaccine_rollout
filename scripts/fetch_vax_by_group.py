@@ -122,3 +122,6 @@ def fetch_vax_by_group():
             header_flag = True
             counter += 1
             print('Fetched ' + str(counter) + ' of ' + str(len(counties)) + ' counties!')
+
+# Fetch data
+fetch_vax_by_group()

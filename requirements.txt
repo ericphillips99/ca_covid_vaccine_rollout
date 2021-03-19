@@ -1,0 +1,5 @@
+# GitHub Actions Python dependencies
+pandas
+lxml
+selenium==3.*
+
