@@ -47,9 +47,9 @@ jobs:
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add -f data/raw/county_vaccine_data/*
+          git add data/raw/county_vaccine_data/*
           git commit -m "Fetching CA vaccine data"
       - name: Push data to repo
         uses: ad-m/github-push-action@master
         with:
-          github_token: $ {{ secrets.fetch_ca_vax_token }}
+          github_token: ${{ secrets.fetch_ca_vax_token }}
