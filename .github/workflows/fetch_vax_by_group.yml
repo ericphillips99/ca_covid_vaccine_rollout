@@ -52,4 +52,4 @@ jobs:
       - name: Push data to repo
         uses: ad-m/github-push-action@master
         with:
-          github_token: $ {{secrets.fetch_ca_vax_token }}
+          github_token: $ {{ secrets.fetch_ca_vax_token }}
