@@ -1,2 +1,10 @@
 # ca_covid_vaccine_rollout
-Analysis of California's COVID-19 Vaccination Rollout
+## Socioeconomic Analysis of California's COVID-19 Vaccination Rollout
+
+### Proposal: [ca_vaccine_rollout_proposal](https://github.com/ericphillips99/ca_covid_vaccine_rollout/blob/main/ca_vaccine_rollout_proposal.pdf)
+
+### Report: [ca_vaccine_rollout_report](https://github.com/ericphillips99/ca_covid_vaccine_rollout/blob/main/ca_vaccine_rollout_report.pdf)
+
+**Executive Summary:** Inequities in the impact of COVID-19 across racial, ethnic, and economic lines in California highlight the importance of pursuing a vaccination rollout that does not reinforce or exacerbate these inequities. Examining data from the CDPH (California Department of Public Health) as well as the US Census Bureau, I find that California’s COVID-19 vaccination rollout has been initially plagued by parallel inequities. While vaccination data by race/ethnicity is imperfect, there seems to be a large discrepancy in the share of vaccinations given to Latino Californians in comparison to their share of the population, a trend which mirrors the unequal negative impact of COVID-19 that have been faced by this group. This discrepancy is most heavily concentrated in counties located in the Central and Southern regions of California. Using county-level data, I find a highly statistically significant positive relationship between a county’s income per capita and its share of population that has received at least one dose of a COVID-19 vaccination (controlling racial, age, and insured population differentials), indicating that richer counties are being vaccinated at higher rates than poorer ones and that this difference is not easily explained by factors such as senior population or differences in racial demographics. I recommend that the CDPH take immediate action to remedy these inequities.
+
+*Datasets referenced in the report are stored in the [report_datasets](https://github.com/ericphillips99/ca_covid_vaccine_rollout/tree/main/report_datasets) folder. Scripts used to scrape data from the California Department of Public Health are stored in the [scripts](https://github.com/ericphillips99/ca_covid_vaccine_rollout/tree/main/scripts) folder.*
